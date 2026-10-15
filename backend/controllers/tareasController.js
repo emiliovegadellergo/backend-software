@@ -19,4 +19,4 @@ module.exports = {
     createTarea,
     updateTarea,
     deleteTarea
-}
+} pendiente crear adentro de models tareasModel.js 
