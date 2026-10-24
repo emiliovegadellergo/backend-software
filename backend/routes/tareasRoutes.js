@@ -1,11 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const {getTareas, createTarea, updateTarea, deleteTarea} = require('../controllers/tareasController');
+const express = require('express')
+const router = express.Router()
+const {getTareas, createTareas, updateTarea, deleteTarea} = require('../controllers/tareasController')
 
-router.get('/', getTareas);
-router.post('/', createTarea);
+router.get('/', getTareas)
+router.post('/', createTareas)
 
-router.put('/:id', updateTarea);
-router.delete('/:id', deleteTarea);
+router.put('/:id', updateTarea)
+router.delete('/:id', deleteTarea)
 
-module.exports = router;
+module.exports = router
+
+
+
+
