@@ -73,6 +73,10 @@ Authorization: Bearer <token>
 - Si un usuario intenta modificar o eliminar una tarea ajena, la API responde **401** y la tarea no cambia.
 - Las contraseñas se guardan con hash (bcrypt).
 
+## Pruebas con Postman
+
+En la carpeta `postman/` están la colección **Backend JWT - Pruebas Tarea** (`BackendJWT.postman_collection.json`) y el entorno **Backend JWT Local** (`BackendJWT.postman_environment.json`). Importa ambos en Postman, selecciona el entorno y ejecuta las pruebas en orden (01 a 20, luego X1 y X2): los scripts guardan solos `tokenPedro`, `tokenJuan`, `idPedro1` e `idPedro`.
+
 ## Estructura
 
 ```
