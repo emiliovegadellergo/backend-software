@@ -1,0 +1,20 @@
+$kind: http-request
+url: http://localhost:5001/api/tareas
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "descripcion": "Estudiar para el examen"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{tokenPedro}}"
+scripts:
+  - type: afterResponse
+    code: pm.environment.set('idPedro1', pm.response.json()._id);
+    language: text/javascript
+order: 1000

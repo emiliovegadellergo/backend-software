@@ -1,0 +1,12 @@
+name: Backend JWT Local
+values:
+  - key: baseUrl
+    value: 'http://localhost:5001'
+  - key: tokenPedro
+    value: ''
+  - key: tokenJuan
+    value: ''
+  - key: idPedro1
+    value: ''
+  - key: idPedro
+    value: ''

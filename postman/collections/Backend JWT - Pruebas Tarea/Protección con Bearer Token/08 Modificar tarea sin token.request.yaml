@@ -1,0 +1,14 @@
+$kind: http-request
+url: http://localhost:5001/api/tareas/000000000000000000000000
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "descripcion": "No debería cambiar"
+    }
+auth:
+  type: noauth
+order: 3000

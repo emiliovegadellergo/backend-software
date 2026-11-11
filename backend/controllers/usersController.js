@@ -59,7 +59,7 @@ const loginUser = asyncHandler(async(req, res) => {
             token: generarToken(user.id)
         })
     } else {
-        res.status(403)
+        res.status(401)
         throw new Error("Credenciales Incorrectas")
     }
 })

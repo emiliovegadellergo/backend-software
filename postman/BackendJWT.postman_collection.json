@@ -1,0 +1,901 @@
+{
+	"info": {
+		"_postman_id": "9ff033ac-ccba-435d-aaaf-411c9c352f27",
+		"name": "Backend JWT - Pruebas Tarea",
+		"description": "Pruebas 1-20 y extras de la actividad Backend JWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "0"
+	},
+	"item": [
+		{
+			"name": "Registro y login",
+			"item": [
+				{
+					"name": "01 Registrar a Pedro",
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Pedro\",\n  \"email\": \"pedro@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 Registrar a Juan",
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Juan\",\n  \"email\": \"juan@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 Login de Pedro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set('tokenPedro', pm.response.json().token);"
+								],
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"pedro@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 Login de Juan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set('tokenJuan', pm.response.json().token);"
+								],
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"juan@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 Datos de Pedro",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/users/datos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"datos"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Protección con Bearer Token",
+			"item": [
+				{
+					"name": "06 Listar tareas sin token",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 Crear tarea sin token",
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"No debería crearse\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 Modificar tarea sin token",
+					"request": {
+						"method": "PUT",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"No debería cambiar\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas/000000000000000000000000",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"000000000000000000000000"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 Eliminar tarea sin token",
+					"request": {
+						"method": "DELETE",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas/000000000000000000000000",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"000000000000000000000000"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 Listar con token alterado",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}ALTERADO",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD de Pedro",
+			"item": [
+				{
+					"name": "11a Pedro crea tarea 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set('idPedro1', pm.response.json()._id);"
+								],
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"Estudiar para el examen\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11b Pedro crea tarea 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set('idPedro', pm.response.json()._id);"
+								],
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"Entregar la tarea de JWT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12 Pedro lista sus tareas",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13 Pedro modifica su tarea 1",
+					"request": {
+						"method": "PUT",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"Estudiar para el examen (repasar JWT)\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas/{{idPedro1}}",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"{{idPedro1}}"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Aislamiento",
+			"item": [
+				{
+					"name": "14 Juan crea su tarea",
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenJuan}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"Tarea de Juan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "15 Juan lista sus tareas",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenJuan}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "16 Juan intenta modificar tarea de Pedro",
+					"request": {
+						"method": "PUT",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenJuan}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descripcion\": \"Modificada por Juan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/tareas/{{idPedro}}",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"{{idPedro}}"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "17 Juan intenta eliminar tarea de Pedro",
+					"request": {
+						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenJuan}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas/{{idPedro}}",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"{{idPedro}}"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "18 Pedro confirma que su tarea sigue igual",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eliminación por el dueño",
+			"item": [
+				{
+					"name": "19 Pedro elimina su tarea",
+					"request": {
+						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas/{{idPedro}}",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas",
+								"{{idPedro}}"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "20 Pedro lista sus tareas",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPedro}}",
+									"type": "string"
+								}
+							]
+						},
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/tareas",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tareas"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extra",
+			"item": [
+				{
+					"name": "X1 Registro con correo repetido",
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Pedro\",\n  \"email\": \"pedro@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "X2 Login con contraseña incorrecta",
+					"request": {
+						"method": "POST",
+						"auth": {
+							"type": "noauth"
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"pedro@test.com\",\n  \"password\": \"incorrecta\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							],
+							"protocol": "http",
+							"port": "5001"
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

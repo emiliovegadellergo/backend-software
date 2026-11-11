@@ -1,0 +1,6 @@
+$kind: http-request
+url: http://localhost:5001/api/tareas/000000000000000000000000
+method: DELETE
+auth:
+  type: noauth
+order: 4000

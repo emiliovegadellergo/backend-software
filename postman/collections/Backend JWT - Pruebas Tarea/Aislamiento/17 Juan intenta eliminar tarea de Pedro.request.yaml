@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://localhost:5001/api/tareas/{{idPedro}}
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{tokenJuan}}"
+order: 4000
